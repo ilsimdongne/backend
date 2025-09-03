@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${DEV_DB_URL:jdbc:log4jdbc:mysql://localhost:3306/sarangbang} # 개발용 DB URL
+    url: ${DEV_DB_URL:jdbc:log4jdbc:mysql://localhost:9912/sarangbang} # 개발용 DB URL
     username: ${DEV_DB_USERNAME:root}
     password: ${DEV_DB_PASSWORD:1234}
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
