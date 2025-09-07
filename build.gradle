@@ -63,6 +63,9 @@ dependencies {
 
 	// AWS
 	implementation platform('software.amazon.awssdk:bom:2.20.110') // 최신 BOM 버전
+
+	// build.gradle
+	implementation 'com.google.firebase:firebase-admin:9.1.1'
 }
 
 tasks.named('test') {

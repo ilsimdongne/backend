@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import sarangbang.site.notification.component.EmitterManager;
+import sarangbang.site.notification.dto.FcmTokenRequestDTO;
 import sarangbang.site.notification.dto.NotificationResponseDTO;
 import sarangbang.site.notification.service.NotificationService;
 import sarangbang.site.security.details.CustomUserDetails;
@@ -71,5 +72,25 @@ public class NotificationController {
         notificationService.deleteNotifications(userId);
         return ResponseEntity.ok("알림 삭제 완료");
     }
+
+    // 사용자 FCM 토큰 저장
+    @PostMapping("/token")
+    public ResponseEntity<Void> saveFCMToken(
+            @RequestBody FcmTokenRequestDTO requestDTO,
+            @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        notificationService.saveFCMToken(requestDTO.getToken(), userDetails.getId());
+        return ResponseEntity.ok().build();
+    }
+
+    // 사용자 FCM 토큰 삭제
+    @DeleteMapping("/token")
+    public ResponseEntity<String> deleteFCMToken(
+            @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        notificationService.deleteFCMToken(userDetails.getId());
+        return ResponseEntity.ok("FCM 토큰이 삭제되었습니다.");
+    }
+
 
 }

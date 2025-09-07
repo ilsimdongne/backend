@@ -103,6 +103,8 @@ public class ChallengeApplicationService {
                     "신청서 결과 확인 url..(구현 전)"
             );
 
+            notificationService.sendPushNotification(app.getUser().getId(), content); // 푸시 알림
+
             return changeApp;
 
         } else throw new SecurityException("챌린지 방장의 권한이 없습니다.");
@@ -181,6 +183,8 @@ public class ChallengeApplicationService {
                 NotificationConstant.CHALLENGE_APPLY_TYPE,
                 "/challenge-manage/" + challenge.getId()
         );
+
+        notificationService.sendPushNotification(ownerId, NotificationConstant.CHALLENGE_APPLY);
 
         log.info("<= 챌린지 신청서 저장 로직 종료. userId: {}, applicationId: {}", userId, challengeApplication.getId());
         return responseDTO;
